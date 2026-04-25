@@ -1,0 +1,43 @@
+[package]
+name = "ai-vision"
+version = "0.1.0"
+edition = "2024"
+default-run = "ai-vision"
+
+[features]
+dev-tools = ["dep:image", "dep:imageproc", "dep:ab_glyph"]
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+reqwest = { version = "0.12", features = ["json", "blocking"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+base64 = "0.22"
+
+[dependencies.image]
+version = "0.25"
+optional = true
+
+[dependencies.imageproc]
+version = "0.25"
+optional = true
+features = ["default"]
+
+[dependencies.ab_glyph]
+version = "0.2"
+optional = true
+
+[[bin]]
+name = "ai-vision"
+path = "src/main.rs"
+
+[[bin]]
+name = "render_text"
+path = "src/bin/render_text.rs"
+required-features = ["dev-tools"]
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = "deny"
